@@ -6,21 +6,20 @@ const name = document.querySelector('.name');
 const desc = document.querySelector('.desc');
 const temp = document.querySelector('.temp');
 const displayContainer = document.querySelector('.display');
+const errContainer = document.querySelector('.error');
 
 const renderWeather = function (data) {
-  console.log(data);
-  const html = ` 
-  <div class="display">
-  <h1 class="d name">${data.name},${data.sys.country}</h1>
-  <p class="d desc">${data.weather[0].description}</p>
-  <p class="d temp">tempreture ${(data.main.temp - 273).toFixed(1)}°C</p>
-  <p class= "d humid">humidity ${data.main.humidity} g/kg</p>
-  </div>
-  `;
-  // desc.value = temp.value = '';
-  inputValue.value = '';
-  displayContainer.innerHTML = '';
-  displayContainer.insertAdjacentHTML('afterbegin', html);
+  try {
+    init();
+
+    thorwError(data);
+
+    const html = markup(data);
+
+    displayContainer.insertAdjacentHTML('afterbegin', html);
+  } catch (err) {
+    renderError(err.message);
+  }
 };
 
 buttonSubmit.addEventListener('click', function () {
@@ -31,10 +30,40 @@ buttonSubmit.addEventListener('click', function () {
       response => response.json(),
       err => alert(err)
     )
-    .then(data => renderWeather(data));
+    .then(data => {
+      renderWeather(data);
+    });
 });
 
 buttonClear.addEventListener('click', function () {
   inputValue.value = '';
   displayContainer.innerHTML = '';
 });
+
+const init = function () {
+  errContainer.textContent = '';
+  inputValue.value = '';
+  displayContainer.innerHTML = '';
+};
+
+const renderError = function (error) {
+  errContainer.textContent = error;
+};
+
+const thorwError = function (data) {
+  if (data.cod === '400')
+    throw new Error('Something went wrong: Please enter city');
+  if (data.cod === '404')
+    throw new Error(`Something went wrong: ${data.message}`);
+};
+
+const markup = function (data) {
+  return ` 
+  <div class="display">
+   <h1 class="d name">${data.name},${data.sys.country}</h1>
+    <p class="d desc">${data.weather[0].description}</p>
+    <p class="d temp">tempreture ${(data.main.temp - 273).toFixed(1)}°C</p>
+    <p class= "d humid">humidity ${data.main.humidity} g/kg</p>
+  </div>
+  `;
+};

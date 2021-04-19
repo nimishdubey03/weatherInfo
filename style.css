@@ -26,7 +26,7 @@ body {
   padding: 2rem;
   font-style: italic;
   font-size: 5rem;
-  font-weight: 900;
+  font-weight: 400;
   color: rgb(238, 183, 183);
 }
 .base {
@@ -34,9 +34,8 @@ body {
   font-size: 2rem;
   font-family: 'Josefin Sans', sans-serif;
   color: rgb(0, 0, 0);
-  font-weight: 800;
-  top: 79px;
-  left: 90rem;
+  font-weight: 600;
+  top: 89px;
 }
 .input {
   height: 50px;
@@ -93,8 +92,10 @@ body {
 .d {
   padding: 3px;
 }
-.page {
-  min-height: 100%;
+.error {
+  position: absolute;
+  font-size: 20px;
+  top: 60rem;
 }
 .footer {
   background: black;
