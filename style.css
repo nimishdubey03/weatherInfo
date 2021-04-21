@@ -21,6 +21,10 @@ body {
   /* align-items: center; */
   justify-content: center;
 }
+ion-icon {
+  font-size: 20px;
+}
+
 .heading {
   position: absolute;
   padding: 2rem;
@@ -133,7 +137,17 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 .address {
+  font-size: 15px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif sans-serif;
   text-align: right;
+  position: relative;
+  top: 4rem;
+}
+.address-logo {
+  position: absolute;
+  right: 30px;
+  top: 1px;
 }
 .footer .footer-bottom {
   background: #343a40;
@@ -145,4 +159,17 @@ body {
   bottom: 0%;
   left: 0%;
   padding-top: 20px;
+}
+
+.instagram {
+  color: #c707c1;
+}
+.twitter {
+  color: rgb(10, 153, 248);
+}
+.facebook {
+  color: #4267b2;
+}
+.github {
+  color: aliceblue;
 }
